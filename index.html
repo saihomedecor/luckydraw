@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucky Draw App</title>
+</head>
+<body>
+  <h1>🎉 Lucky Draw App 🎉</h1>
+
+  <form id="entryForm">
+    <input type="text" id="name" placeholder="Enter Name" required>
+    <input type="text" id="phone" placeholder="Enter Phone No." required>
+    <button type="submit">Submit Entry</button>
+  </form>
+
+  <button id="drawBtn">Pick Winner</button>
+  <h2 id="winner"></h2>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
