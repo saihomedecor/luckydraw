@@ -2,6 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucky Draw System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Lucky Draw System 🎉</h1>
+
+    <form id="entryForm">
+      <input type="text" id="name" placeholder="Enter Name" required>
+      <input type="text" id="phone" placeholder="Enter Phone Number" required>
+      <button type="submit">Add Entry</button>
+    </form>
+
+    <h2>📋 Participants</h2>
+    <ul id="participantsList"></ul>
+
+    <button id="drawButton">🎲 Pick Winner</button>
+
+    <h2 id="winnerBox">🏆 Winner: <span id="winnerName">None</span></h2>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <title>Lucky Draw</title>
   <!-- Firebase App + Firestore (CDN se) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
