@@ -1,40 +1,46 @@
-// Entry submit karne ka code
-document.getElementById("entryForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+// app.js
+const form = document.getElementById("entryForm");
+const drawBtn = document.getElementById("drawBtn");
+const winnerEl = document.getElementById("winner");
 
+// Entry submit
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
 
-  if (!name || !phone) return alert("Please enter details");
+  if (!name || !phone) {
+    alert("Please fill all fields");
+    return;
+  }
 
-  // Duplicate check
-  const snapshot = await db.collection("entries")
-    .where("phone", "==", phone)
-    .get();
-
+  // Check if already entered
+  const snapshot = await db.collection("entries").where("phone", "==", phone).get();
   if (!snapshot.empty) {
-    alert("❌ Aap pehle se entry kar chuke ho!");
+    alert("This phone number already has an entry!");
     return;
   }
 
   await db.collection("entries").add({ name, phone });
-  alert("✅ Entry submitted successfully!");
+  alert("Entry submitted!");
+  form.reset();
 });
 
-// Winner select karna
-document.getElementById("drawBtn").addEventListener("click", async () => {
+// Lucky draw
+drawBtn.addEventListener("click", async () => {
   const snapshot = await db.collection("entries").get();
-  if (snapshot.empty) {
-    alert("No entries yet!");
+  const entries = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  if (entries.length === 0) {
+    alert("No entries found!");
     return;
   }
-
-  const entries = [];
-  snapshot.forEach(doc => entries.push(doc.data()));
 
   const randomIndex = Math.floor(Math.random() * entries.length);
   const winner = entries[randomIndex];
 
-  document.getElementById("winner").innerText =
-    `🏆 Winner: ${winner.name} (${winner.phone})`;
+  winnerEl.textContent = `Winner: ${winner.name} (${winner.phone})`;
+
+  // Remove winner so next time they don’t win again
+  await db.collection("entries").doc(winner.id).delete();
 });
