@@ -1,0 +1,13 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyAzzx36vRPHcnOUlPSA359Mf1zPSCB095U",
+  authDomain: "lucky-draw-43843.firebaseapp.com",
+  projectId: "lucky-draw-43843",
+  storageBucket: "lucky-draw-43843.firebasestorage.app",
+  messagingSenderId: "1093033039206",
+  appId: "1:1093033039206:web:0898fb72cf0523af18a4a7",
+  measurementId: "G-SBK1ZZPXV6"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
